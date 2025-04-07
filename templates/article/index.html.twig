@@ -1,20 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ArticleController!{% endblock %}
+{% block title %}Hello MainController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/superStudent/src/Controller/ArticleController.php'|file_link(0) }}">src/Controller/ArticleController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/superStudent/templates/article/index.html.twig'|file_link(0) }}">templates/article/index.html.twig</a></code></li>
-    </ul>
+<div class="container">
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Titre</th>
+        <th scope="col">Description</th>
+        <th scope="col">Auteur</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for dat in data %}
+      <tr>
+        <th scope="row">{{ dat.id }}</th>
+        <td>{{ dat.title }}</td>
+        <td>{{ dat.content }}</td>
+        <td>{{ dat.author }}</td>
+        <td > <class="form-group">
+            <a href="{{ path ( 'update', {'id': dat.id})}}" class="btn btn-info mt-2">Modifier</a>
+        </td>
+        <td class="form-group">
+            <a href=" {{ path ('delete', {'id': dat.id})}}" class="btn btn-info mt-2 ">Supprimer</a>
+        </td>
+      </tr>
+      {%  endfor %}
+    </tbody>
+  </table>
 </div>
+  
 {% endblock %}

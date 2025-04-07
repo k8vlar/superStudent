@@ -4,11 +4,12 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <link rel="stylesheet" href="https://bootswatch.com/5/pulse/bootstrap.min.css">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    
+        <link rel="stylesheet" href="{{ asset('images')}}">
+       
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
@@ -18,6 +19,39 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+    {#navbar#}
+        <nav class="navbar navbar-expand-lg bg-warning">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">Mes Articles</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> Gestion des articles</a>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="{{ path ("app_contact")}}">Liste des articles</a>
+                                    <a class="dropdown-item" href="{{ path ("app_contact")}}">Liste des contacts</a>
+                                    <div class="dropdown-divider"></div>
+                                    {#} permet de creer la ligne de separation dans la dropdown bar#}
+                                    <a class="dropdown-item" href="{{ path ('listeContactsSexe', {'sexe' : 0})}}">Liste des Hommes</a>
+                                    <a class="dropdown-item" href="{{ path ('listeContactsSexe', {'sexe' : 1})}}">Liste des Femmes</a>
+                                </div>
+                        </li> 
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{path ("categories")}}">Liste des Catégories</a>
+                        </li>
+                    </ul>
+                </div>  
+            </div>
+        </nav>
+        {% block body %}
+        {% endblock %}
     </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+
 </html>

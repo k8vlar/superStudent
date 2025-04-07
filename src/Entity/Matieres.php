@@ -6,11 +6,12 @@ use App\Repository\MatieresRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @ORM\Entity(repositoryClass=MatieresRepository::class)
  */
-class Matieres
+class Matieres extends AbstractController
 {
     /**
      * @ORM\Id
@@ -18,11 +19,6 @@ class Matieres
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $libelle;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -35,9 +31,14 @@ class Matieres
     private $description;
 
     /**
-     * @ORM\OneToMany(targetEntity=Article::class, mappedBy="matieres")
+     * @ORM\OneToMany(targetEntity=Article::class, mappedBy="Matieres")
      */
     private $articles;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $titre;
 
     public function __construct()
     {
@@ -48,19 +49,6 @@ class Matieres
     {
         return $this->id;
     }
-
-    public function getLibelle(): ?string
-    {
-        return $this->libelle;
-    }
-
-    public function setLibelle(string $libelle): self
-    {
-        $this->libelle = $libelle;
-
-        return $this;
-    }
-
     public function getPicture(): ?string
     {
         return $this->picture;
@@ -97,7 +85,6 @@ class Matieres
     {
         if (!$this->articles->contains($article)) {
             $this->articles[] = $article;
-            $article->setMatieres($this);
         }
 
         return $this;
@@ -111,6 +98,18 @@ class Matieres
                 $article->setMatieres(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTitre(): ?string
+    {
+        return $this->titre;
+    }
+
+    public function setTitre(string $titre): self
+    {
+        $this->titre = $titre;
 
         return $this;
     }

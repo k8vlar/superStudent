@@ -2,13 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\CommentairesRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\CommentairesRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @ORM\Entity(repositoryClass=CommentairesRepository::class)
  */
-class Commentaires
+class Commentaires extends AbstractController
 {
     /**
      * @ORM\Id

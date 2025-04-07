@@ -34,9 +34,10 @@ class RegistrationController extends AbstractController
 
             $entityManager->persist($user);
             $entityManager->flush();
+            $this->addFlash('success','vous etes bien un nouveau membre');
             // do anything else you need here, like send an email
 
-            return $this->redirectToRoute('_profiler_open_file');
+            return $this->redirectToRoute('home');
         }
 
         return $this->render('registration/register.html.twig', [
